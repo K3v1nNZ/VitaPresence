@@ -48,12 +48,17 @@
             this.UseMacDefault = new System.Windows.Forms.CheckBox();
             this.updateIntervallabel = new System.Windows.Forms.Label();
             this.updateIntervalBox = new System.Windows.Forms.TextBox();
+            this.igdbIdLabel = new System.Windows.Forms.Label();
+            this.igdbIdBox = new System.Windows.Forms.TextBox();
+            this.igdbSecretBox = new System.Windows.Forms.TextBox();
+            this.igdbSecretLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.trayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(88, 216);
+            this.connectButton.Location = new System.Drawing.Point(88, 298);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(75, 23);
             this.connectButton.TabIndex = 13;
@@ -100,7 +105,7 @@
             this.checkTime.AutoSize = true;
             this.checkTime.Checked = true;
             this.checkTime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkTime.Location = new System.Drawing.Point(40, 278);
+            this.checkTime.Location = new System.Drawing.Point(40, 360);
             this.checkTime.Name = "checkTime";
             this.checkTime.Size = new System.Drawing.Size(117, 17);
             this.checkTime.TabIndex = 14;
@@ -132,7 +137,7 @@
             // 
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusLabel.ForeColor = System.Drawing.Color.Red;
-            this.statusLabel.Location = new System.Drawing.Point(28, 172);
+            this.statusLabel.Location = new System.Drawing.Point(28, 255);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(200, 40);
             this.statusLabel.TabIndex = 12;
@@ -172,7 +177,7 @@
             // checkTray
             // 
             this.checkTray.AutoSize = true;
-            this.checkTray.Location = new System.Drawing.Point(40, 301);
+            this.checkTray.Location = new System.Drawing.Point(40, 383);
             this.checkTray.Name = "checkTray";
             this.checkTray.Size = new System.Drawing.Size(102, 17);
             this.checkTray.TabIndex = 15;
@@ -184,7 +189,7 @@
             this.checkMainMenu.AutoSize = true;
             this.checkMainMenu.Checked = true;
             this.checkMainMenu.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkMainMenu.Location = new System.Drawing.Point(40, 255);
+            this.checkMainMenu.Location = new System.Drawing.Point(40, 337);
             this.checkMainMenu.Name = "checkMainMenu";
             this.checkMainMenu.Size = new System.Drawing.Size(150, 17);
             this.checkMainMenu.TabIndex = 18;
@@ -203,7 +208,7 @@
             // UseMacDefault
             // 
             this.UseMacDefault.AutoSize = true;
-            this.UseMacDefault.Location = new System.Drawing.Point(40, 325);
+            this.UseMacDefault.Location = new System.Drawing.Point(40, 407);
             this.UseMacDefault.Name = "UseMacDefault";
             this.UseMacDefault.Size = new System.Drawing.Size(178, 17);
             this.UseMacDefault.TabIndex = 19;
@@ -232,11 +237,66 @@
             this.updateIntervalBox.Text = "10";
             this.updateIntervalBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // igdbIdLabel
+            // 
+            this.igdbIdLabel.AutoSize = true;
+            this.igdbIdLabel.Location = new System.Drawing.Point(78, 175);
+            this.igdbIdLabel.MinimumSize = new System.Drawing.Size(100, 0);
+            this.igdbIdLabel.Name = "igdbIdLabel";
+            this.igdbIdLabel.Size = new System.Drawing.Size(100, 13);
+            this.igdbIdLabel.TabIndex = 23;
+            this.igdbIdLabel.Text = "IGDB Client ID";
+            this.igdbIdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // igdbIdBox
+            // 
+            this.igdbIdBox.Location = new System.Drawing.Point(78, 192);
+            this.igdbIdBox.MaxLength = 128;
+            this.igdbIdBox.Name = "igdbIdBox";
+            this.igdbIdBox.Size = new System.Drawing.Size(100, 20);
+            this.igdbIdBox.TabIndex = 24;
+            this.igdbIdBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // igdbSecretBox
+            // 
+            this.igdbSecretBox.Location = new System.Drawing.Point(78, 232);
+            this.igdbSecretBox.MaxLength = 128;
+            this.igdbSecretBox.Name = "igdbSecretBox";
+            this.igdbSecretBox.Size = new System.Drawing.Size(100, 20);
+            this.igdbSecretBox.TabIndex = 27;
+            this.igdbSecretBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // igdbSecretLabel
+            // 
+            this.igdbSecretLabel.AutoSize = true;
+            this.igdbSecretLabel.Location = new System.Drawing.Point(78, 215);
+            this.igdbSecretLabel.MinimumSize = new System.Drawing.Size(100, 0);
+            this.igdbSecretLabel.Name = "igdbSecretLabel";
+            this.igdbSecretLabel.Size = new System.Drawing.Size(100, 13);
+            this.igdbSecretLabel.TabIndex = 26;
+            this.igdbSecretLabel.Text = "IGDB Client Secret";
+            this.igdbSecretLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(28, 212);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(200, 40);
+            this.label4.TabIndex = 25;
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(256, 358);
+            this.ClientSize = new System.Drawing.Size(256, 435);
+            this.Controls.Add(this.igdbSecretBox);
+            this.Controls.Add(this.igdbSecretLabel);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.igdbIdBox);
+            this.Controls.Add(this.igdbIdLabel);
             this.Controls.Add(this.updateIntervallabel);
             this.Controls.Add(this.updateIntervalBox);
             this.Controls.Add(this.UseMacDefault);
@@ -284,6 +344,11 @@
         private System.Windows.Forms.CheckBox UseMacDefault;
         private System.Windows.Forms.Label updateIntervallabel;
         private System.Windows.Forms.TextBox updateIntervalBox;
+        private System.Windows.Forms.Label igdbIdLabel;
+        private System.Windows.Forms.TextBox igdbIdBox;
+        private System.Windows.Forms.TextBox igdbSecretBox;
+        private System.Windows.Forms.Label igdbSecretLabel;
+        private System.Windows.Forms.Label label4;
     }
 }
 

@@ -9,12 +9,16 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Media;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using IGDB;
+using IGDB.Models;
 using Timer = System.Timers.Timer;
 
 namespace VitaPresence_GUI
@@ -32,6 +36,8 @@ namespace VitaPresence_GUI
         private Timestamps time = null;
         private static Timer timer;
         private bool HasSeenMacPrompt = false;
+
+        private IGDBClient igdbClient;
 
         public MainForm()
         {
@@ -120,6 +126,8 @@ namespace VitaPresence_GUI
                 addressBox.Enabled = false;
                 clientBox.Enabled = false;
                 updateIntervalBox.Enabled = false;
+                igdbIdBox.Enabled = false;
+                igdbSecretBox.Enabled = false;
             }
             else
             {
@@ -143,6 +151,8 @@ namespace VitaPresence_GUI
                 addressBox.Enabled = true;
                 clientBox.Enabled = true;
                 updateIntervalBox.Enabled = true;
+                igdbIdBox.Enabled = true;
+                igdbSecretBox.Enabled = true;
                 LastTitleID = "";
                 time = null;
             }
@@ -181,6 +191,8 @@ namespace VitaPresence_GUI
                 Enabled = false,
             };
             timer.Elapsed += new ElapsedEventHandler(OnConnectTimeout);
+
+            igdbClient = IGDBClient.CreateWithDefaults(igdbIdBox.Text, igdbSecretBox.Text);
 
 #if DEBUG
             rpc.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
@@ -279,9 +291,22 @@ namespace VitaPresence_GUI
                     if (rpc != null)
                     {
                         if (checkMainMenu.Checked == false && title.Index == 0)
+                        {
                             rpc.ClearPresence();
+                        }
                         else
-                            rpc.SetPresence(PresenceCommon.Utils.CreateDiscordPresence(title, time, stateBox.Text));
+                        {
+                            if (title.Index == 0)
+                            {
+                                Console.WriteLine(title.TitleName);
+                                rpc.SetPresence(PresenceCommon.Utils.CreateDiscordPresence(title, time, stateBox.Text));
+                            }
+                            else
+                            {
+                                Game game = igdbClient.QueryAsync<Game>(IGDBClient.Endpoints.Games, $"search \"{title.TitleName}\"; fields id,cover.url;").Result.FirstOrDefault();
+                                rpc.SetPresence(PresenceCommon.Utils.CreateDiscordPresence(title, time, stateBox.Text, game != null ? game.Cover.Value.Url : null));
+                            }
+                        }
                     }
                     ManualUpdate = false;
                     LastTitleID = title.TitleID;
@@ -315,6 +340,8 @@ namespace VitaPresence_GUI
                 stateBox.Text = cfg.State;
                 clientBox.Text = cfg.Client;
                 updateIntervalBox.Text = cfg.UpdateInterval;
+                igdbIdBox.Text = cfg.IgdbId;
+                igdbSecretBox.Text = cfg.IgdbSecret;
                 checkTray.Checked = cfg.AllowTray;
                 checkMainMenu.Checked = cfg.DisplayMainMenu;
                 HasSeenMacPrompt = cfg.SeenAutoMacPrompt;
@@ -351,6 +378,8 @@ namespace VitaPresence_GUI
                     Client = clientBox.Text,
                     State = stateBox.Text,
                     UpdateInterval = updateIntervalBox.Text,
+                    IgdbId = igdbIdBox.Text,
+                    IgdbSecret = igdbSecretBox.Text,
                     DisplayTimer = checkTime.Checked,
                     AllowTray = checkTray.Checked,
                     DisplayMainMenu = checkMainMenu.Checked,

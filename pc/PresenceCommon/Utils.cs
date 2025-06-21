@@ -5,7 +5,7 @@ namespace PresenceCommon
 {
     public static class Utils
     {
-        public static RichPresence CreateDiscordPresence(Title title, Timestamps time, string state = "")
+        public static RichPresence CreateDiscordPresence(Title title, Timestamps time, string state = "", string largeImageUrl = null)
         {
             RichPresence presence = new RichPresence()
             {
@@ -17,13 +17,13 @@ namespace PresenceCommon
             if (title.Index == 0)
             {
                 assets.LargeImageText = "LiveArea";
-                //assets.LargeImageKey = $"0{0x0100000000001000:x}";
+                assets.LargeImageKey = "invalid";
                 presence.Details = "In the LiveArea";
             }
             else
             {
                 assets.LargeImageText = title.TitleName;
-                //assets.LargeImageKey = $"0{title.TitleID:x}";
+                assets.LargeImageKey = largeImageUrl != null ? $"https:{largeImageUrl}" : "invalid";
                 presence.Details = $"{title.TitleName}";
             }
             presence.Assets = assets;

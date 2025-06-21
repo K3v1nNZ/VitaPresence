@@ -1,6 +1,7 @@
 out
 
 pc/.vs
+pc/.idea
 pc/packages
 pc/*/bin
 pc/*/obj
